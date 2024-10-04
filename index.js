@@ -3,10 +3,7 @@ const cors = require("cors");
 
 const app = express();
 const port = process.env.PORT || 5000;
-
-const news = require("./data/news.json");
-const categories = require("./data/categories.json");
-const course = require("./data/courseDetails.json");
+const products = require("./data/courseDetails.json");
 
 app.use(cors());
 
@@ -14,36 +11,18 @@ app.get("/", (req, res) => {
   res.send("Bootcamp E-Learning Server is Running");
 });
 
-app.get("/categories", (req, res) => {
-  res.send(categories);
+
+app.get("/products", (req, res) => {
+  res.send(products);
 });
 
-app.get("/category/:id", (req, res) => {
-  const id = req.params.id;
-  console.log(id);
-
-  if (id == "08") {
-    res.send(news);
-  } else {
-    const categoryBasedNews = news.filter((n) => n.category_id === id);
-    res.send(categoryBasedNews);
-  }
-});
-
-app.get("/news", (req, res) => {
-  res.send(news);
-});
-
-app.get("/course", (req, res) => {
-  res.send(course);
-});
-
-app.get("/news/:id", (req, res) => {
+app.get("/products/:id", (req, res) => {
   id = req.params.id;
   console.log(id);
-  const selectedNews = news.find((n) => n._id === id);
-  res.send(selectedNews);
+  const selectedProducts = products.find((n) => n._id === id);
+  res.send(selectedProducts);
 });
+
 
 app.listen(port, () => {
   console.log(`Bootcamp E-Learning Server is Running on ${port}`);
